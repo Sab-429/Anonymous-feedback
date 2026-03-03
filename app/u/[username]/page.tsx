@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
 import { ApiResponse } from '@/src/types/ApiResponse'
+import { RefreshCw } from 'lucide-react'
 
 interface PublicProfileResponse {
   success: boolean
@@ -22,6 +23,7 @@ const PublicProfilePage = () => {
   const [loading, setLoading] = useState(false)
   const [accepting, setAccepting] = useState(false)
   const [suggestions, setSuggestions] = useState<string[]>([])
+  const [suggestionLoading,setSuggestionLoading] = useState(false)
 
   useEffect(() => {
     if (!username) return
@@ -83,6 +85,7 @@ const PublicProfilePage = () => {
   }
 
   const fetchSuggestions = async () => {
+    setSuggestionLoading(true)
     try {
       const res = await axios.get('/api/suggest-message')
 
@@ -94,13 +97,16 @@ const PublicProfilePage = () => {
     } catch {
       toast.error('Failed to load suggestions')
     }
+    finally{
+      setSuggestionLoading(false)
+    }
   }
 
   return (
     <div className="min-h-screen flex justify-center items-center px-4">
       <div className="w-full max-w-xl bg-white p-6 rounded shadow">
         <h1 className="text-3xl font-bold mb-2 text-center">
-          Send an anonymous message
+          Send an anonymous feedback
         </h1>
 
         <p className="text-center text-muted-foreground mb-6">
@@ -132,18 +138,28 @@ const PublicProfilePage = () => {
               disabled={loading}
               className="w-full"
             >
-              {loading ? 'Sending...' : 'Send Message'}
+              {loading ? 'Sending...' : 'Send Feedback'}
             </Button>
 
             <Separator className="my-6" />
 
-            <Button
-              variant="outline"
-              onClick={fetchSuggestions}
-              className="w-full mb-4"
-            >
-              Get suggested messages
-            </Button>
+            <div className="flex items-center justify-between mb-4">
+              <p className='text-sm font-medium text-muted-foreground'>
+                Suggested Feedback
+              </p>
+              <Button
+                variant = "outline"
+                size= "sm"
+                onClick={fetchSuggestions}
+                disabled={suggestionLoading}
+                className='flex items-center gap-2'
+              >
+                <RefreshCw
+                  className={`h-4 w-4 ${suggestionLoading ? "animate-spin" : ""}`} 
+                />
+                {suggestionLoading ? "Refreshing..." : "Refresh"}
+              </Button>
+            </div>
 
             {suggestions.length > 0 && (
               <div className="space-y-2">
