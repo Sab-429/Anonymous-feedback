@@ -32,7 +32,7 @@ const page = (): JSX.Element => {
       password: data.password
     })
     if(result?.error){
-      toast(
+      toast.error(
         "Login Failed",
         {
           description: "Incorrect username or password",
@@ -40,7 +40,10 @@ const page = (): JSX.Element => {
       )
     }
     if(result?.url) {
-      router.replace("/dashboard")
+      toast.success("You have logged in successfully")
+      setTimeout(() => {
+        router.replace("/dashboard")
+      }, 2000);
     }
   }
 

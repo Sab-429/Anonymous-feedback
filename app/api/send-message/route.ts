@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       { status: 400 }
     )
   }
-  const LIMIT = 3;
+  const LIMIT = 1;
   let limiter = await RateLimit.findOne({email})
   if(!limiter) {
     limiter = await RateLimit.create({email,count: 1})
