@@ -14,7 +14,8 @@ const suggestions = [
   "Sometimes the slides feel text-heavy; simplifying them could improve focus.",
   "Providing more feedback on assignments would help students improve.",
   "Recording lectures for revision purposes would be very useful.",
-  "overall lecture is upto to the mark"
+  "overall lecture is upto to the mark",
+  "very bad teaching not upto the mark"
 ]
 
 export default suggestions
