@@ -13,7 +13,8 @@ const suggestions = [
   "Conducting quick quizzes occasionally would help us assess our understanding.",
   "Sometimes the slides feel text-heavy; simplifying them could improve focus.",
   "Providing more feedback on assignments would help students improve.",
-  "Recording lectures for revision purposes would be very useful."
+  "Recording lectures for revision purposes would be very useful.",
+  "overall lecture is upto to the mark"
 ]
 
 export default suggestions
