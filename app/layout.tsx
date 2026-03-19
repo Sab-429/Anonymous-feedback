@@ -17,20 +17,6 @@ export default function RootLayout({
         <body className={inter.className}>
           {children}
           <Toaster richColors position="top-right"
-            toastOptions={{
-              success: {
-                style: {
-                  background: "#16a34a",
-                  color: "#fff",
-                },
-              },
-              error: {
-                style: {
-                  background: "#dc2626",
-                  color: "#fff",
-                },
-              },
-            }}
           />
         </body>
       </AuthProvider>
